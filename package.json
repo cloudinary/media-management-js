@@ -63,7 +63,6 @@
     "lint": "tools/scripts/lint.sh",
     "coverage": "tools/scripts/test.es6.sh --coverage",
     "test-es6": "tools/scripts/test.es6.sh",
-    "test-es5": "tools/scripts/test.es5.sh",
     "docs": "tools/scripts/docs.sh"
   },
   "optionalDependencies": {
