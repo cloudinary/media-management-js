@@ -30,7 +30,8 @@ const {
   IMAGE_URL
 } = URLS;
 
-const { utils, api, uploader } = cloudinary;
+const { api, uploader } = cloudinary;
+const utils = require('../../../../lib/utils');
 const ARCHIVE_TAG = TEST_TAG + "_archive";
 const PUBLIC_ID1 = ARCHIVE_TAG + "_1";
 const PUBLIC_ID2 = ARCHIVE_TAG + "_2";

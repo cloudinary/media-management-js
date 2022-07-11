@@ -1,6 +1,6 @@
 const isEmpty = require("lodash/isEmpty");
 const cloneDeep = require('lodash/cloneDeep');
-const utils = require('../../../cloudinary').utils;
+const utils = require('../../../lib/utils');
 
 expect.Assertion.prototype.emptyOptions = function () {
   var actual, options, public_id;

@@ -9,8 +9,8 @@ const https = require('https');
 
 const cloudinary = require("../cloudinary");
 
-const { utils, config, Cache } = cloudinary;
-
+const {config} = cloudinary;
+const utils = require('../lib/utils');
 const libPath = Number(process.versions.node.split('.')[0]) < 8 ? 'lib-es5' : 'lib';
 exports.libPath = libPath;
 

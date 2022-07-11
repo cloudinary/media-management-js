@@ -329,14 +329,8 @@ declare module 'cloudinary' {
         api_key?: string;
         api_secret?: string;
         api_proxy?: string;
-        private_cdn?: boolean;
-        secure_distribution?: string;
         force_version?: boolean;
         ssl_detected?: boolean;
-        secure?: boolean;
-        cdn_subdomain?: boolean;
-        secure_cdn_subdomain?: boolean;
-        cname?: string;
         shorten?: boolean;
         sign_url?: boolean;
         long_url_signature?: boolean;
@@ -359,19 +353,6 @@ declare module 'cloudinary' {
         version?: string;
         format?: string;
         url_suffix?: string;
-
-        [futureKey: string]: any;
-    }
-
-    export interface ImageTagOptions {
-        html_height?: string;
-        html_width?: string;
-        srcset?: object;
-        attributes?: object;
-        client_hints?: boolean;
-        responsive?: boolean;
-        hidpi?: boolean;
-        responsive_placeholder?: boolean;
 
         [futureKey: string]: any;
     }
@@ -508,25 +489,6 @@ declare module 'cloudinary' {
         [futureKey: string]: any;
     }
 
-    export interface ProvisioningApiOptions {
-        account_id?: string;
-        provisioning_api_key?: string;
-        provisioning_api_secret?: string;
-        agent?: object;
-        content_type?: string;
-
-        [futureKey: string]: any;
-    }
-
-    export interface AuthTokenApiOptions {
-        key: string;
-        acl: string;
-        ip?: string;
-        start_time?: number;
-        duration?: number;
-        expiration?: number;
-        url?: string;
-    }
 
     type TransformationOptions =
         string
@@ -537,7 +499,7 @@ declare module 'cloudinary' {
         | Array<ImageTransformationOptions>
         | Array<VideoTransformationOptions>;
 
-    type ImageTransformationAndTagsOptions = ImageTransformationOptions | ImageTagOptions;
+    type ImageTransformationAndTagsOptions = ImageTransformationOptions;
     type VideoTransformationAndTagsOptions = VideoTransformationOptions | VideoTagOptions;
     type ImageAndVideoFormatOptions = ImageFormat | VideoFormat;
     type ConfigAndUrlOptions = ConfigOptions | UrlOptions;
@@ -673,8 +635,6 @@ declare module 'cloudinary' {
 
         /****************************** Global Utils *************************************/
 
-        function cloudinary_js_config(): string;
-
         function config(new_config?: boolean | ConfigOptions): ConfigOptions;
 
         function config<K extends keyof ConfigOptions, V extends ConfigOptions[K]>(key: K, value?: undefined): V;
@@ -682,16 +642,6 @@ declare module 'cloudinary' {
         function config<K extends keyof ConfigOptions, V extends ConfigOptions[K]>(key: K, value: V): ConfigOptions & { [Property in K]: V }
 
         function url(public_id: string, options?: TransformationOptions | ConfigAndUrlOptions): string;
-
-        /****************************** Tags *************************************/
-
-        function image(source: string, options?: ImageTransformationAndTagsOptions | ConfigAndUrlOptions): string;
-
-        function picture(public_id: string, options?: ImageTransformationAndTagsOptions | ConfigAndUrlOptions): string;
-
-        function source(public_id: string, options?: TransformationOptions | ConfigAndUrlOptions): string;
-
-        function video(public_id: string, options?: VideoTransformationAndTagsOptions | ConfigAndUrlOptions): string;
 
         /****************************** Utils *************************************/
 
@@ -716,8 +666,6 @@ declare module 'cloudinary' {
             function download_archive_url(options?: ArchiveApiOptions | ConfigAndUrlOptions): string
 
             function download_zip_url(options?: ArchiveApiOptions | ConfigAndUrlOptions): string;
-
-            function generate_auth_token(options?: AuthTokenApiOptions): string;
 
             function webhook_signature(data?: string, timestamp?: number, options?: ConfigOptions): string;
 

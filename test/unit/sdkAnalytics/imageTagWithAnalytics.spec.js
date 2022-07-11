@@ -3,6 +3,7 @@ const mock = require('mock-fs');
 const getSDKVersions = require('../../../lib/utils/encoding/sdkAnalytics/getSDKVersions');
 const cloudinary = require('../../../cloudinary');
 const TEST_CLOUD_NAME = require('../../testUtils/testConstants').TEST_CLOUD_NAME;
+const utils = require('../../../lib/utils');
 
 describe('Tests for sdk analytics through image tag', function () {
   let processVersions = {};
@@ -32,7 +33,7 @@ describe('Tests for sdk analytics through image tag', function () {
       node: '12.0.0'
     };
 
-    let imgStr = cloudinary.image("hello", {
+    let imgStr = utils.url("hello", {
       format: "png"
     });
 
@@ -44,12 +45,12 @@ describe('Tests for sdk analytics through image tag', function () {
       node: '12.0.0'
     };
 
-    let imgStr = cloudinary.image("hello", {
+    let imgStr = utils.url("hello", {
       format: "png",
       urlAnalytics: true
     });
 
-    expect(imgStr).to.contain(`src='http://res.cloudinary.com/${TEST_CLOUD_NAME}/image/upload/hello.png?_s=AMAlhAM0`);
+    expect(imgStr).to.contain(`https://res.cloudinary.com/${TEST_CLOUD_NAME}/image/upload/hello.png?_s=AMAlhAM0`);
   });
 
   it('Reads from process.versions and package.json (Mocked) - Responsive', () => {
@@ -57,12 +58,12 @@ describe('Tests for sdk analytics through image tag', function () {
       node: '12.0.0'
     };
 
-    let imgStr = cloudinary.image("hello", {
+    let imgStr = utils.url("hello", {
       format: "png",
       responsive: true,
       urlAnalytics: true
     });
 
-    expect(imgStr).to.contain(`src='http://res.cloudinary.com/${TEST_CLOUD_NAME}/image/upload/hello.png?_s=AMAlhAMA`);
+    expect(imgStr).to.contain(`https://res.cloudinary.com/${TEST_CLOUD_NAME}/image/upload/hello.png?_s=AMAlhAMA`);
   });
 });
