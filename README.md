@@ -1,77 +1,27 @@
-Cloudinary Node SDK
+Cloudinary Media Management Node SDK
 =========================
 ## About
 The Cloudinary Media Management Node SDK allows you to quickly and easily integrate your application with Cloudinary.
 Effortlessly upload and manage your cloud's assets.
 
-
-#### Note
-This Readme provides basic installation and usage information. 
-For the complete documentation, see the [Node SDK Guide](https://cloudinary.com/documentation/node_integration).
-
-## Table of Contents
-- [Key Features](#key-features)
-- [Version Support](#Version-Support)
-- [Installation](#installation)
-- [Usage](#usage)
-    - [Setup](#Setup)
-    - [Transform and Optimize Assets](#Transform-and-Optimize-Assets)
-    - [Generate Image and HTML Tags](#Generate-Image-and-Video-HTML-Tags)
-
-
-## Key Features
-- [Transform](https://cloudinary.com/documentation/node_video_manipulation#video_transformation_examples) and
- [optimize](https://cloudinary.com/documentation/node_image_manipulation#image_optimizations) assets.
-- Generate [image](https://cloudinary.com/documentation/node_image_manipulation#deliver_and_transform_images) and
- [video](https://cloudinary.com/documentation/node_video_manipulation#video_element) tags.
-- [Asset Management](https://cloudinary.com/documentation/node_asset_administration).
-- [Secure URLs](https://cloudinary.com/documentation/video_manipulation_and_delivery#generating_secure_https_urls_using_sdks).
-
-
-
-## Version Support
-| SDK Version   | node 6-16 |
-|---------------|-----------|
-| 1.0.0 & up   | V         |
-
-
 ## Installation
 ```bash
-npm install cloudinary
+npm install @cloudinary/media-management
 ```
 
 # Usage
 ### Setup
 ```js
 // Require the Cloudinary library
-const cloudinary = require('cloudinary').v2
-```
-
-### Transform and Optimize Assets
-- [See full documentation](https://cloudinary.com/documentation/node_image_manipulation).
-
-```js
-cloudinary.url("sample.jpg", {width: 100, height: 150, crop: "fill", fetch_format: "auto"})
+const cloudinary = require('@cloudinary/media-management')
 ```
 
 ### Upload
-- [See full documentation](https://cloudinary.com/documentation/node_image_and_video_upload).
-- [Learn more about configuring your uploads with upload presets](https://cloudinary.com/documentation/upload_presets). 
 ```js
-cloudinary.v2.uploader.upload("/home/my_image.jpg", {upload_preset: "my_preset"}, (error, result)=>{
+cloudinary.uploader.upload("/home/my_image.jpg", (error, result)=>{
   console.log(result, error);
 });
 ```
-### Large/Chunked Upload
-- [See full documentation](https://cloudinary.com/documentation/node_image_and_video_upload#node_js_video_upload).
-```js
-   cloudinary.v2.uploader.upload_large(LARGE_RAW_FILE, {
-          chunk_size: 7000000
-        }, (error, result) => {console.log(error)});
-```
-### Security options
-- [See full documentation](https://cloudinary.com/documentation/solution_overview#security).
-
 ## Contributions
 - Ensure tests run locally (add test command)
 - Open a PR and ensure Travis tests pass
