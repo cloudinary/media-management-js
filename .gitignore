@@ -1,0 +1,15 @@
+node_modules/
+bower_components/
+.idea
+.DS_Store
+.env
+bin
+*.map
+!lib
+test_cache/
+.nyc_output
+docs
+coverage
+# contains temporary cloudianry_url for test accounts
+tools/cloudinary_url.sh
+package-lock.json
