@@ -6,12 +6,10 @@ const helper = require("../spechelper");
 const TIMEOUT = require('../testUtils/testConstants').TIMEOUT;
 const describe = require('../testUtils/suite');
 const wait = require('../testUtils/helpers/wait');
-const generateBreakpoints = require(`../../${helper.libPath}/utils/generateBreakpoints`);
-const { srcsetUrl, generateSrcsetAttribute } = require(`../../${helper.libPath}/utils/srcsetUtils`);
 
 const utils = require('../../lib/utils');
-const { clone, isString, merge, pickOnlyExistingValues } = utils;
-const { sharedExamples, itBehavesLike, test_cloudinary_url } = helper;
+const { clone, merge, pickOnlyExistingValues } = utils;
+const { sharedExamples } = helper;
 
 const TEST_TAG = helper.TEST_TAG;
 const createTestConfig = require('../testUtils/createTestConfig');
@@ -64,159 +62,6 @@ describe("utils", function () {
         sign_url: true,
         type: "authenticated"
       }, specific_options);
-    });
-    it("should correctly sign URL with version", function (done) {
-      expect([`${authenticated_image.public_id}.jpg`, options]).to.produceUrl(new RegExp(`${authenticated_path}/s--[\\w-]+--/${expected_transformation}v${authenticated_image.version}/${authenticated_image.public_id}.jpg`)).and.emptyOptions().and.beServedByCloudinary(done);
-    });
-    it("should correctly sign URL with transformation and version", function (done) {
-      options.transformation = {
-        crop: "crop",
-        width: 10,
-        height: 20
-      };
-      expect([`${authenticated_image.public_id}.jpg`, options]).to.produceUrl(new RegExp(`${authenticated_path}/s--[\\w-]+--/c_crop,h_20,w_10/${expected_transformation}v${authenticated_image.version}/${authenticated_image.public_id}.jpg`)).and.emptyOptions().and.beServedByCloudinary(done);
-    });
-    it("should correctly sign fetch URL", function (done) {
-      options.type = "fetch";
-      expect(["https://res.cloudinary.com/demo/sample.png", options]).to.produceUrl(new RegExp(`^${root_path}/image/fetch/s--[\\w-]+--/${expected_transformation}v${authenticated_image.version}/https://res.cloudinary.com/demo/sample.png$`)).and.emptyOptions().and.beServedByCloudinary(done);
-    });
-  });
-  describe('URL options', function () {
-    it("should use cloud_name from config", function () {
-      test_cloudinary_url("test", {}, `https://res.cloudinary.com/${cloud_name}/image/upload/test`, {});
-    });
-    it("should allow overriding cloud_name in options", function () {
-      test_cloudinary_url("test", {
-        cloud_name: "test321"
-      }, "https://res.cloudinary.com/test321/image/upload/test", {});
-    });
-    it("should use format from options", function () {
-      test_cloudinary_url("test", {
-        format: 'jpg'
-      }, `https://res.cloudinary.com/${cloud_name}/image/upload/test.jpg`, {});
-    });
-    it("should support url_suffix in shared distribution", function () {
-      test_cloudinary_url("test", {
-        url_suffix: "hello"
-      }, `https://res.cloudinary.com/${cloud_name}/images/test/hello`, {});
-      test_cloudinary_url("test", {
-        url_suffix: "hello",
-        angle: 0
-      }, `https://res.cloudinary.com/${cloud_name}/images/a_0/test/hello`, {});
-    });
-    it("should disallow url_suffix in non upload types", function () {
-      expect(function () {
-        utils.url("test", {
-          url_suffix: "hello",
-          private_cdn: true,
-          type: 'facebook'
-        });
-      }).to.throwError(/URL Suffix only supported for image\/upload, image\/private, image\/authenticated, video\/upload and raw\/upload/);
-    });
-    it("should disallow url_suffix with / or .", function () {
-      expect(function () {
-        utils.url("test", {
-          url_suffix: "hello/world",
-          private_cdn: true
-        });
-      }).to.throwError(/url_suffix should not include . or \//);
-      expect(function () {
-        utils.url("test", {
-          url_suffix: "hello.world",
-          private_cdn: true
-        });
-      }).to.throwError(/url_suffix should not include . or \//);
-    });
-    it("should use width and height from options only if crop is given", function () {
-      test_cloudinary_url("test", {
-        width: 100,
-        height: 100,
-        crop: 'crop'
-      }, `https://res.cloudinary.com/${cloud_name}/image/upload/c_crop,h_100,w_100/test`, {
-        width: 100,
-        height: 100
-      });
-    });
-    it("should support initial width and height", function () {
-      test_cloudinary_url("test", {
-        width: "iw",
-        height: "ih",
-        crop: 'crop'
-      }, `https://res.cloudinary.com/${cloud_name}/image/upload/c_crop,h_ih,w_iw/test`, {
-        width: "iw",
-        height: "ih"
-      });
-    });
-    it("should not pass width and height to html in case angle was used", function () {
-      test_cloudinary_url("test", {
-        width: 100,
-        height: 100,
-        crop: 'scale',
-        angle: 'auto'
-      }, `https://res.cloudinary.com/${cloud_name}/image/upload/a_auto,c_scale,h_100,w_100/test`, {});
-    });
-    it("should disallow radius arrays that contain 0 or more than 4 values", function () {
-      expect(function () {
-        return utils.url("test", {
-          radius: [10, 20, 30, 10, 20]
-        });
-      }).to.throwError(/Radius array should contain between 1 and 4 values/);
-      expect(function () {
-        return utils.url("test", {
-          radius: []
-        });
-      }).to.throwError(/Radius array should contain between 1 and 4 values/);
-    });
-    it("should disallow radius arrays containing null values", function () {
-      expect(function () {
-        return utils.url("test", {
-          radius: [null, 20, 30, 10]
-        });
-      }).to.throwError(/Corner: Cannot be null/);
-    });
-    it("should use x, y, radius, prefix, gravity and quality from options", function () {
-      test_cloudinary_url("test", {
-        x: 1,
-        y: 2,
-        radius: 3,
-        gravity: 'center',
-        quality: 0.4,
-        prefix: "a"
-      }, `https://res.cloudinary.com/${cloud_name}/image/upload/g_center,p_a,q_0.4,r_3,x_1,y_2/test`, {});
-      test_cloudinary_url("test", {
-        gravity: 'auto',
-        crop: "crop",
-        width: "0.5"
-      }, `https://res.cloudinary.com/${cloud_name}/image/upload/c_crop,g_auto,w_0.5/test`, {});
-    });
-
-    it("should use type from options", function () {
-      test_cloudinary_url("test", {
-        type: 'facebook'
-      }, `https://res.cloudinary.com/${cloud_name}/image/facebook/test`, {});
-    });
-    it("should ignore http links only if type is not given", function () {
-      test_cloudinary_url("https://test", {
-        type: null
-      }, "https://test", {});
-      test_cloudinary_url("https://test", {
-        type: "fetch"
-      }, `https://res.cloudinary.com/${cloud_name}/image/fetch/https://test`, {});
-    });
-    it("should escape fetch urls", function () {
-      test_cloudinary_url("https://blah.com/hello?a=b", {
-        type: "fetch"
-      }, `https://res.cloudinary.com/${cloud_name}/image/fetch/https://blah.com/hello%3Fa%3Db`, {});
-    });
-    it("should escape http urls", function () {
-      test_cloudinary_url("https://www.youtube.com/watch?v=d9NF2edxy-M", {
-        type: "youtube"
-      }, `https://res.cloudinary.com/${cloud_name}/image/youtube/https://www.youtube.com/watch%3Fv%3Dd9NF2edxy-M`, {});
-    });
-    it('should escape api urls', function () {
-      const folderName = "sub^folder's test";
-      const url = utils.base_api_url(['folders', folderName]);
-      expect(url).to.match(/folders\/sub%5Efolder%27s%20test$/);
     });
   });
   describe('build_eager', function () {
@@ -314,63 +159,6 @@ describe("utils", function () {
       backup: null
     }).backup).to.eql(void 0);
     expect(utils.build_upload_params({}).backup).to.eql(void 0);
-  });
-  it("should add version if public_id contains /", function () {
-    test_cloudinary_url("folder/test", {}, `https://res.cloudinary.com/${cloud_name}/image/upload/v1/folder/test`, {});
-    test_cloudinary_url("folder/test", {
-      version: 123
-    }, `https://res.cloudinary.com/${cloud_name}/image/upload/v123/folder/test`, {});
-  });
-  it("should not add version if public_id contains version already", function () {
-    test_cloudinary_url("v1234/test", {}, `https://res.cloudinary.com/${cloud_name}/image/upload/v1234/test`, {});
-  });
-  it("should not set default version v1 to resources stored in folders if force_version is set to false", function () {
-    test_cloudinary_url("folder/test", {},
-      `https://res.cloudinary.com/${cloud_name}/image/upload/v1/folder/test`, {});
-    test_cloudinary_url("folder/test",
-      { force_version: false }, `https://res.cloudinary.com/${cloud_name}/image/upload/folder/test`, {});
-  });
-  it("explicitly set version is always passed", function () {
-    test_cloudinary_url("test",
-      {
-        force_version: false,
-        version: '1234'
-      }, `https://res.cloudinary.com/${cloud_name}/image/upload/v1234/test`, {});
-    test_cloudinary_url("folder/test",
-      {
-        force_version: false,
-        version: '1234'
-      }, `https://res.cloudinary.com/${cloud_name}/image/upload/v1234/folder/test`, {});
-  });
-  it("should use force_version from config", function () {
-    cloudinary.config({ force_version: false });
-    test_cloudinary_url("folder/test",
-      {}, `https://res.cloudinary.com/${cloud_name}/image/upload/folder/test`, {});
-  });
-  it("should override config with options", function () {
-    cloudinary.config({ force_version: false });
-    test_cloudinary_url("folder/test",
-      { force_version: true }, `https://res.cloudinary.com/${cloud_name}/image/upload/v1/folder/test`, {});
-  });
-  it("should allow to shorted image/upload urls", function () {
-    test_cloudinary_url("test", {
-      shorten: true
-    }, `https://res.cloudinary.com/${cloud_name}/iu/test`, {});
-  });
-  it("should escape public_ids", function () {
-    const expressions = [
-      // [source, target]
-      ["a b", "a%20b"],
-      ["a+b", "a%2Bb"],
-      ["a%20b", "a%20b"],
-      ["a-b", "a-b"],
-      ["a??b", "a%3F%3Fb"],
-      ["parentheses(interject)", "parentheses(interject)"],
-      ["abcαβγאבג", "abc%CE%B1%CE%B2%CE%B3%D7%90%D7%91%D7%92"]
-    ];
-    expressions.forEach(([source, target]) => {
-      expect(utils.url(source)).to.eql(`https://res.cloudinary.com/${cloud_name}/image/upload/${target}`);
-    });
   });
   describe('verifyNotificationSignature', function () {
     let expected_parameters, unexpected_parameters, response_json, unexpected_response_json,
@@ -484,32 +272,5 @@ describe("utils", function () {
     sig = utils.webhook_signature(data, timestamp);
     expect(sig).to.eql('bac927006d3ce039ef7632e2c03189348d02924a');
     cloudinary.config(orig);
-  });
-  describe('generateBreakpoints', function () {
-    it('should accept breakpoints', function () {
-      expect(generateBreakpoints({
-        breakpoints: [1, 2, 3]
-      })).to.eql([1, 2, 3]);
-    });
-    it('should accept min_width, max_width', function () {
-      expect(generateBreakpoints({
-        min_width: 100,
-        max_width: 600,
-        max_images: 7
-      })).to.eql([100, 184, 268, 352, 436, 520, 600]);
-    });
-  });
-  describe('srcsetUrl', function () {
-    it('should generate url', function () {
-      var url = srcsetUrl('sample.jpg', 101, {
-        width: 200,
-        crop: 'scale'
-      });
-      expect(url).to.eql(`https://res.cloudinary.com/${cloud_name}/image/upload/c_scale,w_200/c_scale,w_101/sample.jpg`);
-    });
-    it("should generate url without a transformation", function () {
-      var url = srcsetUrl('sample.jpg', 101, {});
-      expect(url).to.eql(`https://res.cloudinary.com/${cloud_name}/image/upload/c_scale,w_101/sample.jpg`);
-    });
   });
 });

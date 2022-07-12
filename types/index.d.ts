@@ -329,16 +329,6 @@ declare module 'cloudinary' {
         api_key?: string;
         api_secret?: string;
         api_proxy?: string;
-        force_version?: boolean;
-        ssl_detected?: boolean;
-        shorten?: boolean;
-        sign_url?: boolean;
-        long_url_signature?: boolean;
-        use_root_path?: boolean;
-        auth_token?: object;
-        account_id?: string;
-        provisioning_api_key?: string;
-        provisioning_api_secret?: string;
         oauth_token?: string;
 
         [futureKey: string]: any;
@@ -347,25 +337,6 @@ declare module 'cloudinary' {
     export interface ResourceOptions {
         type?: string;
         resource_type?: string;
-    }
-
-    export interface UrlOptions extends ResourceOptions {
-        version?: string;
-        format?: string;
-        url_suffix?: string;
-
-        [futureKey: string]: any;
-    }
-
-    export interface VideoTagOptions {
-        source_types?: string | string[];
-        source_transformation?: TransformationOptions;
-        fallback_content?: string;
-        poster?: string | object;
-        controls?: boolean;
-        preload?: string;
-
-        [futureKey: string]: any;
     }
 
     /****************************** Admin API Options *************************************/
@@ -417,13 +388,6 @@ declare module 'cloudinary' {
         moderation_status?: string;
         unsafe_update?: object;
         allowed_for_strict?: boolean;
-
-        [futureKey: string]: any;
-    }
-
-    export interface PublishApiOptions extends ResourceOptions {
-        invalidate?: boolean;
-        overwrite?: boolean;
 
         [futureKey: string]: any;
     }
@@ -499,11 +463,7 @@ declare module 'cloudinary' {
         | Array<ImageTransformationOptions>
         | Array<VideoTransformationOptions>;
 
-    type ImageTransformationAndTagsOptions = ImageTransformationOptions;
-    type VideoTransformationAndTagsOptions = VideoTransformationOptions | VideoTagOptions;
     type ImageAndVideoFormatOptions = ImageFormat | VideoFormat;
-    type ConfigAndUrlOptions = ConfigOptions | UrlOptions;
-    type AdminAndPublishOptions = AdminApiOptions | PublishApiOptions;
     type AdminAndResourceOptions = AdminApiOptions | ResourceApiOptions;
     type AdminAndUpdateApiOptions = AdminApiOptions | UpdateApiOptions;
 
@@ -511,7 +471,6 @@ declare module 'cloudinary' {
     type Status = string | "pending" | "approved" | "rejected";
     type StreamingProfiles = string | "4k" | "full_hd" | "hd" | "sd" | "full_hd_wifi" | "full_hd_lean" | "hd_lean";
     type ModerationKind = string | "manual" | "webpurify" | "aws_rek" | "metascan";
-    type AccessMode = string | "public" | "authenticated";
     type TargetArchiveFormat = string | "zip" | "tgz";
 
     // err is kept for backwards compatibility, it currently will always be undefined
@@ -631,7 +590,7 @@ declare module 'cloudinary' {
     }
 
 
-    export namespace v2 {
+    export namespace cloudinary {
 
         /****************************** Global Utils *************************************/
 
@@ -641,31 +600,24 @@ declare module 'cloudinary' {
 
         function config<K extends keyof ConfigOptions, V extends ConfigOptions[K]>(key: K, value: V): ConfigOptions & { [Property in K]: V }
 
-        function url(public_id: string, options?: TransformationOptions | ConfigAndUrlOptions): string;
+        function url(public_id: string, options?: TransformationOptions): string;
 
         /****************************** Utils *************************************/
 
         namespace utils {
 
-            function sign_request(params_to_sign: object, options?: ConfigAndUrlOptions): { signature: string; api_key: string; [key:string]:any};
+            function sign_request(params_to_sign: object, options?: ConfigOptions): { signature: string; api_key: string; [key:string]:any};
 
             function api_sign_request(params_to_sign: object, api_secret: string): string;
 
             function verifyNotificationSignature(body: string, timestamp: number, signature: string, valid_for?: number): boolean;
 
-            function api_url(action?: string, options?: ConfigAndUrlOptions): string;
-
-            function url(public_id?: string, options?: TransformationOptions | ConfigAndUrlOptions): string;
-
-            function video_thumbnail_url(public_id?: string, options?: VideoTransformationOptions | ConfigAndUrlOptions): string;
-
-            function video_url(public_id?: string, options?: VideoTransformationOptions | ConfigAndUrlOptions): string;
 
             function archive_params(options?: ArchiveApiOptions): Promise<any>;
 
-            function download_archive_url(options?: ArchiveApiOptions | ConfigAndUrlOptions): string
+            function download_archive_url(options?: ArchiveApiOptions): string
 
-            function download_zip_url(options?: ArchiveApiOptions | ConfigAndUrlOptions): string;
+            function download_zip_url(options?: ArchiveApiOptions): string;
 
             function webhook_signature(data?: string, timestamp?: number, options?: ConfigOptions): string;
 
@@ -773,8 +725,6 @@ declare module 'cloudinary' {
 
             function upload(file: string, options?: UploadApiOptions, callback?: UploadResponseCallback): Promise<UploadApiResponse>;
 
-            function upload(file: string, callback?: UploadResponseCallback): Promise<UploadApiResponse>;
-
             function uploadChunked(path: string, options?: UploadApiOptions, callback?: UploadResponseCallback): Promise<UploadApiResponse>;
 
             function uploadChunkedStream(options?: UploadApiOptions, callback?: UploadResponseCallback): UploadStream;
@@ -782,10 +732,6 @@ declare module 'cloudinary' {
             function uploadLarge(path: string, options?: UploadApiOptions, callback?: UploadResponseCallback): Promise<UploadApiResponse>;
 
             function uploadStream(options?: UploadApiOptions, callback?: UploadResponseCallback): UploadStream;
-
-            function uploadTagParams(options?: UploadApiOptions, callback?: UploadResponseCallback): Promise<any>;
-
-            function uploadUrl(options?: ConfigOptions): Promise<any>;
 
             /****************************** Structured Metadata API Methods *************************************/
 

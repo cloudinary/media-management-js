@@ -10,7 +10,6 @@ const https = require('https');
 const cloudinary = require("../cloudinary");
 
 const {config} = cloudinary;
-const utils = require('../lib/utils');
 const libPath = Number(process.versions.node.split('.')[0]) < 8 ? 'lib-es5' : 'lib';
 exports.libPath = libPath;
 
@@ -73,15 +72,6 @@ exports.SAMPLE_VIDEO_SOURCES = [
     transformations: { video_codec: 'auto' }
   }
 ];
-
-exports.test_cloudinary_url = function(public_id, options, expected_url, expected_options) {
-  var url;
-  url = utils.url(public_id, options);
-  expect(url).to.eql(expected_url);
-  expect(options).to.eql(expected_options);
-  return url;
-};
-
 
 const allExamples = {};
 

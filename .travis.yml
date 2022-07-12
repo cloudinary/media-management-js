@@ -7,9 +7,6 @@ matrix:
     script: npm run test-with-temp-cloud
   - node_js: "16"
     script: npm run test-with-temp-cloud
-  - node_js: "18"
-    script: npm run test-with-temp-cloud
-
 notifications:
   email:
     recipients:
