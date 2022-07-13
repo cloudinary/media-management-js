@@ -12,6 +12,7 @@ const helper = require("../../../spechelper");
 const describe = require('../../../testUtils/suite');
 const cloneDeep = require('lodash/cloneDeep');
 const ProxyAgent = require('proxy-agent');
+const utils = require('../../../../lib/utils');
 
 const IMAGE_FILE = helper.IMAGE_FILE;
 const LARGE_RAW_FILE = helper.LARGE_RAW_FILE;
@@ -74,7 +75,7 @@ describe("uploader", function () {
       var expected_signature;
       expect(result.width).to.eql(241);
       expect(result.height).to.eql(51);
-      expected_signature = cloudinary.utils.api_sign_request({
+      expected_signature = utils.apiSignRequest({
         public_id: result.public_id,
         version: result.version
       }, cloudinary.config().api_secret);
@@ -98,7 +99,7 @@ describe("uploader", function () {
       var expected_signature;
       expect(result.width).to.eql(241);
       expect(result.height).to.eql(51);
-      expected_signature = cloudinary.utils.api_sign_request({
+      expected_signature = utils.apiSignRequest({
         public_id: result.public_id,
         version: result.version
       }, cloudinary.config().api_secret);
@@ -281,7 +282,7 @@ describe("uploader", function () {
       var expected_signature;
       expect(result.width).to.eql(241);
       expect(result.height).to.eql(51);
-      expected_signature = cloudinary.utils.api_sign_request({
+      expected_signature = utils.apiSignRequest({
         public_id: result.public_id,
         version: result.version
       }, cloudinary.config().api_secret);
@@ -821,7 +822,7 @@ describe("uploader", function () {
       var expected_signature;
       expect(result.width).to.eql(241);
       expect(result.height).to.eql(51);
-      expected_signature = cloudinary.utils.api_sign_request({
+      expected_signature = utils.apiSignRequest({
         public_id: result.public_id,
         version: result.version
       }, cloudinary.config().api_secret);
@@ -846,7 +847,7 @@ describe("uploader", function () {
       var expected_signature;
       expect(result.width).to.eql(241);
       expect(result.height).to.eql(51);
-      expected_signature = cloudinary.utils.api_sign_request({
+      expected_signature = utils.apiSignRequest({
         public_id: result.public_id,
         version: result.version
       }, cloudinary.config().api_secret);

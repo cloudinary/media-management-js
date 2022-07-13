@@ -7,7 +7,7 @@ assignees: ''
 
 ---
 
-## Bug report for Cloudinary NPM SDK
+## Bug report for Cloudinary Media Management JS SDK
 Before proceeding, please update to latest version and test if the issue persists
 
 ## Describe the bug in a sentence or two.
@@ -36,7 +36,7 @@ Before proceeding, please update to latest version and test if the issue persist
 [ ] All
 
 ## Versions and Libraries (fill in the version numbers)
-Cloudinary_NPM SDK version
+Cloudinary Media Management JS SDK version
 Node - 0.0.0
 NPM - 0.0.0
 

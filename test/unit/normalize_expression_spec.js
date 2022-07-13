@@ -1,4 +1,5 @@
 const cloudinary = require("../../cloudinary");
+const utils =require('../../lib/utils');
 const createTestConfig = require('../testUtils/createTestConfig');
 const helper = require("../spechelper");
 const { SIMPLE_PARAMS } = require(`../../${helper.libPath}/utils/consts`);
@@ -53,7 +54,7 @@ describe("normalize_expression tests", function () {
 
     Object.keys(cases).forEach(function (testDescription) {
       const [input, expected] = cases[testDescription];
-      expect(cloudinary.utils.normalize_expression(input)).to.equal(expected);
+      expect(utils.normalize_expression(input)).to.equal(expected);
     });
   });
   describe('Normalize only specific parameters', () => {
@@ -70,14 +71,14 @@ describe("normalize_expression tests", function () {
           crop: "scale",
           [param]: value
         };
-        const result = cloudinary.utils.generate_transformation_string(options);
+        const result = utils.generate_transformation_string(options);
         expect(result).to.contain(normalizedValue);
         expect(result).to.not.contain(value);
       });
     });
     nonNormalizedParams.forEach((param) => {
       it(`should not normalize value in ${param}`, () => {
-        const result = cloudinary.utils.generate_transformation_string({[param]: value});
+        const result = utils.generate_transformation_string({[param]: value});
         expect(result).to.contain(value);
         expect(result).to.not.contain(normalizedValue);
       });
