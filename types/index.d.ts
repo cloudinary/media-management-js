@@ -600,8 +600,6 @@ declare module 'cloudinary' {
 
         function config<K extends keyof ConfigOptions, V extends ConfigOptions[K]>(key: K, value: V): ConfigOptions & { [Property in K]: V }
 
-        function url(public_id: string, options?: TransformationOptions): string;
-
         /****************************** Utils *************************************/
 
         namespace utils {
@@ -615,13 +613,13 @@ declare module 'cloudinary' {
 
             function archive_params(options?: ArchiveApiOptions): Promise<any>;
 
-            function download_archive_url(options?: ArchiveApiOptions): string
+            function downloadArchiveUrl(options?: ArchiveApiOptions): string
 
-            function download_zip_url(options?: ArchiveApiOptions): string;
+            function downloadZipUrl(options?: ArchiveApiOptions): string;
 
             function webhook_signature(data?: string, timestamp?: number, options?: ConfigOptions): string;
 
-            function private_download_url(publicID: string, format:string, options: Partial<{
+            function privateDownloadUrl(publicID: string, format:string, options: Partial<{
                 resource_type: ResourceType;
                 type: DeliveryType;
                 expires_at: number;

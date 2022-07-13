@@ -82,10 +82,10 @@ describe("archive", function () {
   });
 
   describe("utils", function () {
-    describe('.generate_zip_download_url', function () {
+    describe('.generate_zipDownloadUrl', function () {
       this.archive_result = void 0;
       before(function () {
-        this.archive_result = utils.download_zip_url({
+        this.archive_result = utils.downloadZipUrl({
           target_public_id: 'gem_archive_test',
           public_ids: [PUBLIC_ID2, PUBLIC_ID1],
           target_tags: ARCHIVE_TAG,
@@ -174,38 +174,38 @@ describe("archive", function () {
       });
     });
   });
-  describe('download_folder', function(){
+  describe('downloadFolder', function(){
     it('should return url with resource_type image', function(){
-      let download_folder_url = utils.download_folder('samples/', {resource_type: 'image'});
-      expect(download_folder_url).to.contain('image');
+      let downloadFolder_url = utils.downloadFolder('samples/', {resource_type: 'image'});
+      expect(downloadFolder_url).to.contain('image');
     });
     it('should return valid url', function(){
-      let download_folder_url = utils.download_folder('folder/');
-      expect(download_folder_url).not.to.be.empty();
-      expect(download_folder_url).to.contain('generate_archive');
+      let downloadFolder_url = utils.downloadFolder('folder/');
+      expect(downloadFolder_url).not.to.be.empty();
+      expect(downloadFolder_url).to.contain('generate_archive');
     });
 
     it('should flatten folder', function(){
-      let download_folder_url = utils.download_folder('folder/', {flatten_folders: true});
-      expect(download_folder_url).to.contain('flatten_folders');
+      let downloadFolder_url = utils.downloadFolder('folder/', {flatten_folders: true});
+      expect(downloadFolder_url).to.contain('flatten_folders');
     });
 
     it('should expire_at folder', function(){
-      let download_folder_url = utils.download_folder('folder/', {expires_at: Date.now() / 1000 + 60});
-      expect(download_folder_url).to.contain('expires_at');
+      let downloadFolder_url = utils.downloadFolder('folder/', {expires_at: Date.now() / 1000 + 60});
+      expect(downloadFolder_url).to.contain('expires_at');
     });
 
     it('should use original file_name of folder', function(){
-      let download_folder_url = utils.download_folder('folder/', {use_original_filename: true});
-      expect(download_folder_url).to.contain('use_original_filename');
+      let downloadFolder_url = utils.downloadFolder('folder/', {use_original_filename: true});
+      expect(downloadFolder_url).to.contain('use_original_filename');
     });
   });
 
-  describe('download_backedup_asset', function(){
+  describe('downloadBackedupAsset', function(){
     it('should return url with asset and version id', function(){
-      let download_backedup_asset_url = utils.download_backedup_asset('b71b23d9c89a81a254b88a91a9dad8cd', '0e493356d8a40b856c4863c026891a4e');
-      expect(download_backedup_asset_url).to.contain('asset_id');
-      expect(download_backedup_asset_url).to.contain('version_id');
+      let downloadBackedupAsset_url = utils.downloadBackedupAsset('b71b23d9c89a81a254b88a91a9dad8cd', '0e493356d8a40b856c4863c026891a4e');
+      expect(downloadBackedupAsset_url).to.contain('asset_id');
+      expect(downloadBackedupAsset_url).to.contain('version_id');
     });
   });
 });
