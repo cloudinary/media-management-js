@@ -75,7 +75,7 @@ describe("uploader", function () {
       var expected_signature;
       expect(result.width).to.eql(241);
       expect(result.height).to.eql(51);
-      expected_signature = utils.api_sign_request({
+      expected_signature = utils.apiSignRequest({
         public_id: result.public_id,
         version: result.version
       }, cloudinary.config().api_secret);
@@ -99,7 +99,7 @@ describe("uploader", function () {
       var expected_signature;
       expect(result.width).to.eql(241);
       expect(result.height).to.eql(51);
-      expected_signature = utils.api_sign_request({
+      expected_signature = utils.apiSignRequest({
         public_id: result.public_id,
         version: result.version
       }, cloudinary.config().api_secret);
@@ -282,7 +282,7 @@ describe("uploader", function () {
       var expected_signature;
       expect(result.width).to.eql(241);
       expect(result.height).to.eql(51);
-      expected_signature = utils.api_sign_request({
+      expected_signature = utils.apiSignRequest({
         public_id: result.public_id,
         version: result.version
       }, cloudinary.config().api_secret);
@@ -822,7 +822,7 @@ describe("uploader", function () {
       var expected_signature;
       expect(result.width).to.eql(241);
       expect(result.height).to.eql(51);
-      expected_signature = utils.api_sign_request({
+      expected_signature = utils.apiSignRequest({
         public_id: result.public_id,
         version: result.version
       }, cloudinary.config().api_secret);
@@ -847,7 +847,7 @@ describe("uploader", function () {
       var expected_signature;
       expect(result.width).to.eql(241);
       expect(result.height).to.eql(51);
-      expected_signature = utils.api_sign_request({
+      expected_signature = utils.apiSignRequest({
         public_id: result.public_id,
         version: result.version
       }, cloudinary.config().api_secret);

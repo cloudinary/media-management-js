@@ -12,6 +12,6 @@ describe("getUserAgent", function () {
   });
   it("should add a user platform to USER_AGENT", function () {
     utils.userPlatform = "Spec/1.0 (Test)";
-    expect(utils.getUserAgent()).to.match(/Spec\/1.0 \(Test\) CloudinaryNodeJS\/[\d.]+ \(Node [\d.]+\)/);
+    expect(utils.getUserAgent()).to.match(/Spec\/1.0 \(Test\) CloudinaryNodeJS\/[\d.'-beta']+ \(Node [\d.]+\)/);
   });
 });

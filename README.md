@@ -1,7 +1,7 @@
-Cloudinary Media Management Node SDK
+Cloudinary Media Management JS SDK
 =========================
 ## About
-The Cloudinary Media Management Node SDK allows you to quickly and easily integrate your application with Cloudinary.
+The Cloudinary Media Management JS SDK allows you to quickly and easily integrate your application with Cloudinary.
 Effortlessly upload and manage your cloud's assets.
 
 ## Installation

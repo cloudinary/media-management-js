@@ -182,7 +182,7 @@ describe("utils", function () {
       unexpected_response_json = JSON.stringify(unexpected_parameters);
     });
     it("should return true when signature is valid", function () {
-      response_signature = utils.webhook_signature(response_json, valid_response_timestamp, {
+      response_signature = utils.webhookSignature(response_json, valid_response_timestamp, {
         api_secret: cloudinary.config().api_secret
       });
       expect(
@@ -208,7 +208,7 @@ describe("utils", function () {
       ).to.eql(true);
     });
     it("should return false when signature is not valid", function () {
-      response_signature = utils.webhook_signature(response_json, valid_response_timestamp, {
+      response_signature = utils.webhookSignature(response_json, valid_response_timestamp, {
         api_secret: cloudinary.config().api_secret
       });
       expect(
@@ -220,7 +220,7 @@ describe("utils", function () {
       ).to.eql(false);
     });
     it("should return false when body, timestamp, or signature aren't given", function () {
-      response_signature = utils.webhook_signature(response_json, valid_response_timestamp, {
+      response_signature = utils.webhookSignature(response_json, valid_response_timestamp, {
         api_secret: cloudinary.config().api_secret
       });
       expect(utils.verifyNotificationSignature(response_json, valid_response_timestamp)).to.eql(false);
@@ -228,7 +228,7 @@ describe("utils", function () {
       expect(utils.verifyNotificationSignature()).to.eql(false);
     });
     it("should return false when timestamp is too far past with default validity expiration time", function () {
-      response_signature = utils.webhook_signature(response_json, invalid_response_timestamp, {
+      response_signature = utils.webhookSignature(response_json, invalid_response_timestamp, {
         api_secret: cloudinary.config().api_secret
       });
       expect(
@@ -240,7 +240,7 @@ describe("utils", function () {
       ).to.eql(false);
     });
     it("should return false when timestamp is too far past with custom validity expiration time", function () {
-      response_signature = utils.webhook_signature(response_json, valid_response_timestamp, {
+      response_signature = utils.webhookSignature(response_json, valid_response_timestamp, {
         api_secret: cloudinary.config().api_secret
       });
       expect(
@@ -259,7 +259,7 @@ describe("utils", function () {
       expect(utils.encode_double_array([[1, 2, 3, 4], [5, 6, 7, 8]])).to.eql("1,2,3,4|5,6,7,8");
     });
   });
-  it("should call validate_webhook_signature", function () {
+  it("should call validate_webhookSignature", function () {
     var data, orig, sig, timestamp;
     this.timeout(1000);
     data = '{"public_id":"117e5550-7bfa-11e4-80d7-f962166bd3be","version":1417727468}';
@@ -269,7 +269,7 @@ describe("utils", function () {
       api_key: 'key',
       api_secret: 'shhh'
     });
-    sig = utils.webhook_signature(data, timestamp);
+    sig = utils.webhookSignature(data, timestamp);
     expect(sig).to.eql('bac927006d3ce039ef7632e2c03189348d02924a');
     cloudinary.config(orig);
   });

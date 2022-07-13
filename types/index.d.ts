@@ -435,6 +435,7 @@ declare module 'cloudinary' {
         invalidate?: boolean;
         moderation?: ModerationKind;
         notification_url?: string;
+        eager_notification_url?: string;
         overwrite?: boolean;
         phash?: boolean;
         proxy?: string;
@@ -606,7 +607,7 @@ declare module 'cloudinary' {
 
             function sign_request(params_to_sign: object, options?: ConfigOptions): { signature: string; api_key: string; [key:string]:any};
 
-            function api_sign_request(params_to_sign: object, api_secret: string): string;
+            function apiSignRequest(params_to_sign: object, api_secret: string): string;
 
             function verifyNotificationSignature(body: string, timestamp: number, signature: string, valid_for?: number): boolean;
 
@@ -617,7 +618,7 @@ declare module 'cloudinary' {
 
             function downloadZipUrl(options?: ArchiveApiOptions): string;
 
-            function webhook_signature(data?: string, timestamp?: number, options?: ConfigOptions): string;
+            function webhookSignature(data?: string, timestamp?: number, options?: ConfigOptions): string;
 
             function privateDownloadUrl(publicID: string, format:string, options: Partial<{
                 resource_type: ResourceType;

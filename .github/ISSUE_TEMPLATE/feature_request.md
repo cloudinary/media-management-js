@@ -7,7 +7,7 @@ assignees: ''
 
 ---
 
-Feature request for Cloudinary Media Management Node SDK
+Feature request for Cloudinary Media Management JS SDK
 …(If your feature is for other SDKs, please request them there)
 
 

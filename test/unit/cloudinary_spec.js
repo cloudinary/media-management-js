@@ -344,7 +344,7 @@ describe("cloudinary", function () {
     });
   });
   it("should correctly sign api requests", function () {
-    expect(utils.api_sign_request({
+    expect(utils.apiSignRequest({
       hello: null,
       goodbye: 12,
       world: "problem",
@@ -353,7 +353,7 @@ describe("cloudinary", function () {
   });
   it("should correctly sign api requests with signature algorithm SHA1", function () {
     cloudinary.config({ signature_algorithm: 'sha1' });
-    expect(utils.api_sign_request({
+    expect(utils.apiSignRequest({
       username: "user@cloudinary.com",
       timestamp: 1568810420,
       cloud_name: "dn6ot3ged"
@@ -361,7 +361,7 @@ describe("cloudinary", function () {
   });
   it("should correctly sign api requests with signature algorithm SHA1 as default", function () {
     cloudinary.config({ signature_algorithm: null });
-    expect(utils.api_sign_request({
+    expect(utils.apiSignRequest({
       username: "user@cloudinary.com",
       timestamp: 1568810420,
       cloud_name: "dn6ot3ged"
@@ -369,7 +369,7 @@ describe("cloudinary", function () {
   });
   it("should correctly sign api requests with signature algorithm SHA256", function () {
     cloudinary.config({ signature_algorithm: 'sha256' });
-    expect(utils.api_sign_request({
+    expect(utils.apiSignRequest({
       username: "user@cloudinary.com",
       timestamp: 1568810420,
       cloud_name: "dn6ot3ged"
