@@ -18,8 +18,8 @@ const cloudinary = require('@cloudinary/media-management')
 
 ### Upload
 ```js
-cloudinary.uploader.upload("/home/my_image.jpg", (error, result)=>{
-  console.log(result, error);
+cloudinary.uploader.upload("/home/my_image.jpg").then(function (result) {
+    console.log(result)
 });
 ```
 ## Contributions
