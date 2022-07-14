@@ -106,15 +106,18 @@ describe("uploader", function () {
       expect(result.signature).to.eql(expected_signature);
     });
   });
-
-
-
   it("should successfully override original_filename", function () {
     return cloudinary.uploader.upload("http://cloudinary.com/images/old_logo.png", {
       filename_override: 'overridden'
     }).then((result) => {
       expect(result.original_filename).to.eql('overridden');
     });
+  });
+
+  it("Should successfully return upload callback result", function () {
+    cloudinary.uploader.upload("http://cloudinary.com/images/old_logo.png", (err, res) => {
+      expect(res).to.not.eql(undefined)
+    })
   });
 
   it("Should upload a valid docx file as base64", function () {
