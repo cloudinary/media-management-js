@@ -154,6 +154,11 @@ describe("api", function () {
         expect(result.resource_types).to.contain("image");
       });
     });
+    it("Should successfully return api callback result", function () {
+      cloudinary.api.resources((err, res) => {
+        expect(res).to.not.eql(undefined)
+      })
+    });
     it("should allow listing resources", function () {
       var publicId;
       this.timeout(TIMEOUT.MEDIUM);
