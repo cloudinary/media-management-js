@@ -29,7 +29,7 @@ cloudinary.uploader.upload("/home/my_image.jpg").then(function (result) {
 
 ## Get Help
 If you run into an issue or have a question, you can either:
-- Issues related to the SDK: [Open a Github issue](https://github.com/cloudinary/cloudinary_npm/issues).
+- Issues related to the SDK: [Open a Github issue](https://github.com/cloudinary/media-management-js/issues).
 - Issues related to your account: [Open a support ticket](https://cloudinary.com/contact)
 
 
