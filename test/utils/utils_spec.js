@@ -143,7 +143,8 @@ describe("utils", function () {
       use_filename: false,
       colors: "true",
       image_metadata: "false",
-      invalidate: 1
+      invalidate: 1,
+      eager_async: "1"
     };
     params = utils.build_upload_params(options);
     expected = pickOnlyExistingValues(params, ...Object.keys(options));
@@ -152,7 +153,8 @@ describe("utils", function () {
       use_filename: 0,
       colors: 1,
       image_metadata: 0,
-      invalidate: 1
+      invalidate: 1,
+      eager_async: 1
     };
     expect(expected).to.eql(actual);
     expect(utils.build_upload_params({
