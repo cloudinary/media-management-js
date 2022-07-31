@@ -426,6 +426,7 @@ export interface UploadApiOptions {
     colors?: boolean;
     discard_original_filename?: boolean;
     eager?: TransformationOptions;
+    eager_async?: boolean;
     eval?: string;
     faces?: boolean;
     filename_override?: string;
