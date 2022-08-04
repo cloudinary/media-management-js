@@ -12,13 +12,20 @@ npm install @cloudinary/media-management
 # Usage
 ### Setup
 ```js
-// Require the Cloudinary library
-const cloudinary = require('@cloudinary/media-management')
+// Import the Cloudinary library
+import cloudinary from '@cloudinary/media-management';
+
+// Config
+cloudinary.config({
+  cloud_name: 'cloud_name',
+  api_key: 'api_key',
+  api_secret: 'api_secret'
+});
 ```
 
 ### Upload
 ```js
-cloudinary.uploader.upload("/home/my_image.jpg").then(function (result) {
+cloudinary.uploader.upload("/home/my_image.jpg").then((result) => {
     console.log(result)
 });
 ```
