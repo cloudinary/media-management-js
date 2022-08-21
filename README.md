@@ -4,6 +4,25 @@ Cloudinary Media Management JS SDK
 The Cloudinary Media Management JS SDK allows you to quickly and easily integrate your application with Cloudinary.
 Effortlessly upload and manage your cloud's assets.
 
+#### Note
+This Readme provides basic installation and usage information.
+For the complete documentation, see the [Media Management SDK Guide](https://cloudinary.com/documentation/media_management_api).
+
+## Table of Contents
+- [Version Support](#Version-Support)
+- [Installation](#installation)
+- [Usage](#usage)
+    - [Setup](#Setup)
+    - [Upload](#Upload)
+- [Contributions](#Contributions)
+- [Get Help](#Get Help)
+
+## Version Support
+| SDK Version     | node 14-16 |
+|-----------------|------------|
+| 0.1.0-beta & up | V          |
+
+
 ## Installation
 ```bash
 npm install @cloudinary/media-management
@@ -29,6 +48,7 @@ cloudinary.uploader.upload("/home/my_image.jpg").then((result) => {
     console.log(result)
 });
 ```
+
 ## Contributions
 - Ensure tests run locally (add test command)
 - Open a PR and ensure Travis tests pass
