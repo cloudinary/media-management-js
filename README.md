@@ -4,6 +4,25 @@ Cloudinary Media Management JS SDK
 The Cloudinary Media Management JS SDK allows you to quickly and easily integrate your application with Cloudinary.
 Effortlessly upload and manage your cloud's assets.
 
+#### Note
+This Readme provides basic installation and usage information.
+For the complete documentation, see the [Media Management SDK Guide](https://cloudinary.com/documentation/media_management_api).
+
+## Table of Contents
+- [Version Support](#Version-Support)
+- [Installation](#installation)
+- [Usage](#usage)
+    - [Setup](#Setup)
+    - [Upload](#Upload)
+- [Contributions](#Contributions)
+- [Get Help](#Get Help)
+
+## Version Support
+| SDK Version     | node 14-16 |
+|-----------------|------------|
+| 0.1.0-beta & up | V          |
+
+
 ## Installation
 ```bash
 npm install @cloudinary/media-management
@@ -12,23 +31,24 @@ npm install @cloudinary/media-management
 # Usage
 ### Setup
 ```js
-// Import the Cloudinary library
-import cloudinary from '@cloudinary/media-management';
+// Import the Media Management library
+import cloudinaryMM from '@cloudinary/media-management';
 
 // Config
-cloudinary.config({
-  cloud_name: 'cloud_name',
-  api_key: 'api_key',
-  api_secret: 'api_secret'
+cloudinaryMM.config({
+  cloud_name: 'my_mm_cloud_name',
+  api_key: 'my_mm_key',
+  api_secret: 'my_mm_secret'
 });
 ```
 
 ### Upload
 ```js
-cloudinary.uploader.upload("/home/my_image.jpg").then((result) => {
+cloudinaryMM.uploader.upload("/home/my_image.jpg").then((result) => {
     console.log(result)
 });
 ```
+
 ## Contributions
 - Ensure tests run locally (add test command)
 - Open a PR and ensure Travis tests pass
