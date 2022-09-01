@@ -592,19 +592,17 @@ export interface ResourceApiResponse {
 }
 
 
-export namespace cloudinary {
-
     /****************************** Global Utils *************************************/
 
-    function config(new_config?: boolean | ConfigOptions): ConfigOptions;
+    declare function config(new_config?: boolean | ConfigOptions): ConfigOptions;
 
-    function config<K extends keyof ConfigOptions, V extends ConfigOptions[K]>(key: K, value?: undefined): V;
+    declare function config<K extends keyof ConfigOptions, V extends ConfigOptions[K]>(key: K, value?: undefined): V;
 
-    function config<K extends keyof ConfigOptions, V extends ConfigOptions[K]>(key: K, value: V): ConfigOptions & { [Property in K]: V }
+    declare function config<K extends keyof ConfigOptions, V extends ConfigOptions[K]>(key: K, value: V): ConfigOptions & { [Property in K]: V }
 
     /****************************** Utils *************************************/
 
-    namespace utils {
+    declare module utils {
 
         function sign_request(params_to_sign: object, options?: ConfigOptions): { signature: string; api_key: string; [key:string]:any};
 
@@ -631,7 +629,7 @@ export namespace cloudinary {
 
     /****************************** Admin API Methods *************************************/
 
-    namespace api {
+    declare module api {
         function deleteResources(value: string[], options?: AdminAndResourceOptions, callback?: ResponseCallback): Promise<any>;
 
         function deleteResourcesByPrefix(prefix: string, options?: AdminAndResourceOptions, callback?: ResponseCallback): Promise<any>;
@@ -700,7 +698,7 @@ export namespace cloudinary {
 
     /****************************** Upload API Methods *************************************/
 
-    namespace uploader {
+    declare module uploader {
         function addContext(context: string, public_ids: string[], options?: { type?: DeliveryType, resource_type?: ResourceType }, callback?: ResponseCallback): Promise<any>;
 
         function addTag(tag: string, public_ids: string[], options?: { type?: DeliveryType, resource_type?: ResourceType }, callback?: ResponseCallback): Promise<any>;
@@ -740,7 +738,7 @@ export namespace cloudinary {
 
     /****************************** Search API *************************************/
 
-    class search {
+    export class search {
 
         aggregate(value?: string): search;
 
@@ -772,4 +770,3 @@ export namespace cloudinary {
 
         static withField(args?: string): search;
     }
-}
