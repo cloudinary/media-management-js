@@ -5,7 +5,7 @@ function makeSuite(name, tests) {
     before("Verify configuration", function () {
       var config = cloudinary.config(true);
       if (!(config.api_key && config.api_secret)) {
-        expect().fail("Missing key and secret. Please set CLOUDINARY_URL.");
+        expect().fail("Missing key and secret. Please set CLD_MEDIA_MANAGEMENT.");
       }
     });
     tests.apply(this);

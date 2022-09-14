@@ -4,7 +4,7 @@ var cloudinary = require('cloudinary');
 
 var uploads = {};
 
-// set your env variable CLOUDINARY_URL or set the following configuration
+// set your env variable CLD_MEDIA_MANAGEMENT or set the following configuration
 /* cloudinary.config({
   cloud_name: '',
   api_key: '',

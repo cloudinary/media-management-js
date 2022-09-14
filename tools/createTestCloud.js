@@ -1,6 +1,6 @@
 /**
  * This file when used as a script (node tmp.js) will create a new cloud within Cloudinary
- * The CLOUDINARY_URL environment variable string is created, and stored in ./cloudinary_url.sh
+ * The CLD_MEDIA_MANAGEMENT environment variable string is created, and stored in ./cloudinary_url.sh
  * To use a fresh cloud in your tests, source ./cloudinary_url.sh before running the tests
  * Example: node tools/createTestCloud && source tools/cloudinary_url.sh && npm run test
  */
@@ -26,7 +26,7 @@ function setup() {
     res.on('end', () => {
       let cloudData = JSON.parse(data);
       let { payload: { cloudApiKey, cloudApiSecret, cloudName, id } } = cloudData;
-      let URL = `CLOUDINARY_URL=cloudinary://${cloudApiKey}:${cloudApiSecret}@${cloudName}`;
+      let URL = `CLD_MEDIA_MANAGEMENT=cloudinary://${cloudApiKey}:${cloudApiSecret}@${cloudName}`;
 
       fs.writeFileSync(`tools/cloudinary_url.sh`, URL); // This is needed for Travis
       fs.writeFileSync(ENV_FILE_PATH, URL); // This is needed for local develoepr tests
