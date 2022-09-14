@@ -8,46 +8,46 @@ describe("config", function () {
   let proxyBackup;
 
   before(function () {
-    cloudinaryUrlBackup = process.env.CLOUDINARY_URL;
+    cloudinaryUrlBackup = process.env.CLD_MEDIA_MANAGEMENT;
     proxyBackup = process.env.CLOUDINARY_API_PROXY;
   });
 
   after(function () {
-    process.env.CLOUDINARY_URL = cloudinaryUrlBackup || '';
+    process.env.CLD_MEDIA_MANAGEMENT = cloudinaryUrlBackup || '';
     process.env.CLOUDINARY_API_PROXY = proxyBackup || '';
     cloudinary.config(true);
   });
 
 
-  it("should allow nested values in CLOUDINARY_URL", function () {
-    process.env.CLOUDINARY_URL = "cloudinary://key:secret@test123?foo[bar]=value";
+  it("should allow nested values in CLD_MEDIA_MANAGEMENT", function () {
+    process.env.CLD_MEDIA_MANAGEMENT = "cloudinary://key:secret@test123?foo[bar]=value";
     cloudinary.config(true);
     const foo = cloudinary.config().foo;
     expect(foo && foo.bar).to.eql('value');
   });
 
-  it("should load a properly formatted CLOUDINARY_URL", function () {
-    process.env.CLOUDINARY_URL = "cloudinary://123456789012345:ALKJdjklLJAjhkKJ45hBK92baj3@test";
+  it("should load a properly formatted CLD_MEDIA_MANAGEMENT", function () {
+    process.env.CLD_MEDIA_MANAGEMENT = "cloudinary://123456789012345:ALKJdjklLJAjhkKJ45hBK92baj3@test";
     cloudinary.config(true);
   });
 
-  it("should not be sensitive to case in CLOUDINARY_URL's protocol", function () {
-    process.env.CLOUDINARY_URL = "CLouDiNaRY://123456789012345:ALKJdjklLJAjhkKJ45hBK92baj3@test";
+  it("should not be sensitive to case in CLD_MEDIA_MANAGEMENT's protocol", function () {
+    process.env.CLD_MEDIA_MANAGEMENT = "CLouDiNaRY://123456789012345:ALKJdjklLJAjhkKJ45hBK92baj3@test";
     cloudinary.config(true);
   });
 
-  it("should throw error when CLOUDINARY_URL doesn't start with 'cloudinary://'", function () {
-    process.env.CLOUDINARY_URL = "https://123456789012345:ALKJdjklLJAjhkKJ45hBK92baj3@test?cloudinary=foo";
+  it("should throw error when CLD_MEDIA_MANAGEMENT doesn't start with 'cloudinary://'", function () {
+    process.env.CLD_MEDIA_MANAGEMENT = "https://123456789012345:ALKJdjklLJAjhkKJ45hBK92baj3@test?cloudinary=foo";
     try {
       cloudinary.config(true);
       expect().fail();
     } catch (err) {
-      expect(err.message).to.eql("Invalid CLOUDINARY_URL protocol. URL should begin with 'cloudinary://'");
+      expect(err.message).to.eql("Invalid CLD_MEDIA_MANAGEMENT protocol. URL should begin with 'cloudinary://'");
     }
   });
 
-  it("should not throw an error when CLOUDINARY_URL environment variable is missing", function () {
-    delete process.env.CLOUDINARY_URL;
+  it("should not throw an error when CLD_MEDIA_MANAGEMENT environment variable is missing", function () {
+    delete process.env.CLD_MEDIA_MANAGEMENT;
     cloudinary.config(true);
   });
 

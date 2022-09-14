@@ -55,7 +55,7 @@ describe("uploader", function () {
   after(function () {
     var config = cloudinary.config(true);
     if (!(config.api_key && config.api_secret)) {
-      expect().fail("Missing key and secret. Please set CLOUDINARY_URL.");
+      expect().fail("Missing key and secret. Please set CLD_MEDIA_MANAGEMENT.");
     }
     return Q.allSettled([
       !cloudinary.config().keep_test_products ? cloudinary.api.deleteResourcesByTag(TEST_TAG) : void 0,

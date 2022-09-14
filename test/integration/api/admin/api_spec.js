@@ -135,7 +135,7 @@ describe("api", function () {
       return Promise.resolve();
     }
     if (!(config.api_key && config.api_secret)) {
-      expect().fail("Missing key and secret. Please set CLOUDINARY_URL.");
+      expect().fail("Missing key and secret. Please set CLD_MEDIA_MANAGEMENT.");
     }
     return Q.allSettled([
       cloudinary.api.deleteMetadataField(METADATA_EXTERNAL_ID),
