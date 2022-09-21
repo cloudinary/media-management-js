@@ -1,3 +1,11 @@
+0.3.0-beta / 2022-09-21
+==================
+
+  * Dependencies bumped to latest
+  * CLOUDINARY_URL renamed to CLD_MEDIA_MANAGEMENT
+  * Remove cloudinary.cloudinary from types
+  * Add MM user-agent
+
 0.2.1-beta / 2022-08-01
 ==================
 

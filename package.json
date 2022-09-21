@@ -2,7 +2,7 @@
   "author": "Cloudinary <info@cloudinary.com>",
   "name": "@cloudinary/media-management",
   "description": "Cloudinary js package for media management",
-  "version": "0.2.1-beta",
+  "version": "0.3.0-beta",
   "homepage": "http://cloudinary.com",
   "license": "MIT",
   "repository": {
